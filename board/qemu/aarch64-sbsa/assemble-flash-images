@@ -4,7 +4,9 @@ set -e
 
 BOARD_DIR="$(dirname $0)"
 
-cp -f ${BOARD_DIR}/grub.cfg ${BINARIES_DIR}/efi-part/EFI/BOOT/grub.cfg
+# cp -f ${BOARD_DIR}/grub.cfg ${BINARIES_DIR}/efi-part/EFI/BOOT/grub.cfg
+mkdir  -p ${BINARIES_DIR}/efi-part/EFI/BOOT/
+cp ${BINARIES_DIR}/Image ${BINARIES_DIR}/efi-part/EFI/BOOT/bootaa64.efi
 
 # The QEMU sbsa machine expects flash devices to be 256M.
 truncate -s 256M ${BINARIES_DIR}/SBSA_FLASH0.fd
