@@ -51,10 +51,9 @@ PKG_CARGO_ENV = \
 # and should be removed when fixed upstream
 #
 ifeq ($(NORMALIZED_ARCH),arm)
-	PKG_CARGO_ENV += RUSTFLAGS="-Clink-arg=-Wl,--allow-multiple-definition --sysroot=$(STAGING_DIR)"
+	PKG_CARGO_ENV += RUSTFLAGS="-Clink-arg=-Wl,--allow-multiple-definition"
 endif
 
-	PKG_CARGO_ENV += RUSTFLAGS="-Clink-arg=--sysroot=$(STAGING_DIR) -C target-feature=-crt-static"
 HOST_PKG_CARGO_ENV = \
 	$(PKG_COMMON_CARGO_ENV)
 
