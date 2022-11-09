@@ -1,0 +1,12 @@
+config BR2_PACKAGE_FIDO
+	bool "fido"
+	depends on BR2_PACKAGE_HOST_RUSTC_TARGET_ARCH_SUPPORTS
+	select BR2_PACKAGE_HOST_RUSTC
+	select BR2_PACKAGE_CRYPTSETUP
+	select BR2_PACKAGE_OPENSSL
+	select BR2_PACKAGE_TPM2_TSS
+	select BR2_PACKAGE_CLANG
+	help
+	  This is a comment that explains what foo is.
+
+	  https://github.com/fedora-iot/fido-device-onboard-rs
