@@ -21,3 +21,5 @@ rm -rf $1//usr/lib/libaio.so*
 # rm -rf $1//usr/lib/libdevmapper*
 # rm -rf $1//usr/lib/libjson-c*
 rm -rf $1//usr/lib/libstdc*
+
+tar xpvfz fdo_client_keys.tar.gz --strip-components=1 -C $1
