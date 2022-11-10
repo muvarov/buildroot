@@ -23,3 +23,7 @@ rm -rf $1//usr/lib/libaio.so*
 rm -rf $1//usr/lib/libstdc*
 
 tar xpvfz fdo_client_keys.tar.gz --strip-components=1 -C $1
+
+# fix musl bug
+ln -s /lib64/ld-musl-aarch64.so.1 $1/bin/ldd
+ln -s /lib64/ld-musl-aarch64.so.1 $1/lib/ld-linux-aarch64.so.1
