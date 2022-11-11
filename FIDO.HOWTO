@@ -1,0 +1,28 @@
+    make with:
+    1. place client.tar.gz with has client/etc/device_credential FDO credential file.
+    1. make qemu_aarch64_sbsa_defconfig
+    3. make
+    
+    ls -lh ./output/images/
+     12M Oct 19 19:17 disk.img <- final disk image with EFI partition
+    4.0K Oct 19 16:14 efi-part
+     11M Oct 19 19:17 efi-part.vfat
+     11M Oct 19 19:17 Image <- image with built in initrd
+    1.6M Oct 19 19:17 rootfs.cpio <- inird busybox
+   
+    4.  Then run it with:
+    qemu-system-aarch64 -m 2048 -smp 2 -nographic -cpu cortex-a57 \
+    -bios flash.bin -machine virt,secure=on  \
+    -drive id=os,if=none,file=${WIC} -device virtio-blk-device,drive=os \
+    -object rng-random,filename=/dev/urandom,id=rng0 -device virtio-rng-pci,rng=rng0 \
+    -device virtio-rng-pci \
+    -nic user,model=virtio-net-pci
+
+    5. perform onboarding on client
+	# /usr/bin/fdo-client-linuxapp
+	 1970-01-01T00:22:22.057Z INFO  fdo_client_linuxapp > Found device credential at FileSystemPath { path: "/etc/device_credential", deactivation_method: None }
+	 1970-01-01T00:22:22.136Z INFO  fdo_client_linuxapp > Got TO2 addresses: ["http://147.75.55.125:8081"]
+	 1970-01-01T00:22:22.137Z INFO  fdo_client_linuxapp > Performing TO2 protocol, URL: "http://147.75.55.125:8081"
+	 1970-01-01T00:22:22.242Z INFO  fdo_client_linuxapp::serviceinfo > Creating file "/root/resolv.conf" with 52 bytes (mode 384)
+	 1970-01-01T00:22:22.267Z INFO  fdo_client_linuxapp              > Secure Device Onboarding DONE
+
